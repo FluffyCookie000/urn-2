@@ -1,6 +1,8 @@
 from discord.ext import commands
 from dotenv import load_dotenv
 from datetime import datetime as DT
+import os
+import discord
 
 
 load_dotenv()
