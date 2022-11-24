@@ -16,7 +16,7 @@ async def on_ready():
     print(f"{bot.user} ({bot.user.id}) is online\nTime at start: {bot.currentTime}\nTime to start: " + str((DT.now() - bot.startTime)))
     await bot.change_presence(activity=discord.Game(name="urn"))
 
-@bot.user_command(guilds_id=[767528920437227530], name='death')
+@bot.user_command(guild_ids=[767528920437227530], name='death')
 async def death(ctx, user: discord.Member):
     if ctx.author.id == 557286947106586627:
         await ctx.respond("bot killed", ephemeral=True)
@@ -24,11 +24,17 @@ async def death(ctx, user: discord.Member):
     else:
         await ctx.respond("bozo you cant do this", ephemeral=True)
 
+@bot.message_command(name='urn')
+async def urn(ctx, message: discord.Message):
+    dm = bot.get_user(message.author.id)
+    await dm.send("⚱")
+    await ctx.respond(f"<@{message.author.id}> has been ⚱ed", ephemeral=True)
+
 @bot.user_command(name='urn')
-async def callbackname(ctx, user: discord.Member):
-    await ctx.respond(f"<@{user.id}> has been ⚱ed", ephemeral=True)
+async def urn(ctx, user: discord.Member):
     dm = bot.get_user(user.id)
     await dm.send("⚱")
+    await ctx.respond(f"<@{user.id}> has been ⚱ed", ephemeral=True)
 
 @bot.event
 async def on_message(message):
