@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from datetime import datetime as DT
 import os
 import discord
+from discord import Option
 
 urn = ["urn", "Urn", "URn", "URN", "urN", "uRN", "uRn", "UrN",]
 
@@ -15,6 +16,12 @@ bot.currentTime = DT.now()
 async def on_ready():
     print(f"{bot.user} ({bot.user.id}) is online\nTime at start: {bot.currentTime}\nTime to start: " + str((DT.now() - bot.startTime)))
     await bot.change_presence(activity=discord.Game(name="urn"))
+
+@bot.slash_command(name="urn", description="⚱")
+async def urn(ctx, urn: Option(discord.Member, "pick a user to ⚱", required=True, defualt=None)):
+    dm = bot.get_user(urn.id)
+    await dm.send("⚱")
+    await ctx.respond(f"<@{urn.id}> has been ⚱ed", ephemeral=True)
 
 @bot.user_command(guild_ids=[767528920437227530], name='death')
 async def death(ctx, user: discord.Member):
