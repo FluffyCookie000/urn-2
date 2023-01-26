@@ -20,8 +20,11 @@ async def on_ready():
 @bot.slash_command(name="urn", description="⚱")
 async def urn(ctx, urn: Option(discord.Member, "pick a user to ⚱", required=True, defualt=None)):
     dm = bot.get_user(urn.id)
-    await dm.send("⚱")
-    await ctx.respond(f"<@{urn.id}> has been ⚱ed", ephemeral=True)
+    try:
+        await dm.send("⚱")
+        await ctx.respond(f"<@{urn.id}> has been ⚱ed", ephemeral=True)
+    except:
+        await ctx.respond(f"an error accured", ephemeral=True)
 
 @bot.user_command(guild_ids=[767528920437227530], name='death')
 async def death(ctx, user: discord.Member):
@@ -34,14 +37,20 @@ async def death(ctx, user: discord.Member):
 @bot.message_command(name='urn')
 async def urn(ctx, message: discord.Message):
     dm = bot.get_user(message.author.id)
-    await dm.send("⚱")
-    await ctx.respond(f"<@{message.author.id}> has been ⚱ed", ephemeral=True)
+    try:
+        await dm.send("⚱")
+        await ctx.respond(f"<@{message.author.id}> has been ⚱ed", ephemeral=True)
+    except:
+        await ctx.respond(f"an error accured", ephemeral=True)
 
 @bot.user_command(name='urn')
 async def urn(ctx, user: discord.Member):
     dm = bot.get_user(user.id)
-    await dm.send("⚱")
-    await ctx.respond(f"<@{user.id}> has been ⚱ed", ephemeral=True)
+    try:
+        await dm.send("⚱")
+        await ctx.respond(f"<@{user.id}> has been ⚱ed", ephemeral=True)
+    except:
+        await ctx.respond(f"an error accured", ephemeral=True)
 
 @bot.event
 async def on_message(message):
