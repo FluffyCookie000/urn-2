@@ -15,7 +15,13 @@ bot.currentTime = DT.now()
 @bot.event
 async def on_ready():
     print(f"{bot.user} ({bot.user.id}) is online\nTime at start: {bot.currentTime}\nTime to start: " + str((DT.now() - bot.startTime)))
-    await bot.change_presence(activity=discord.Game(name="urn"))
+    with open(r'dm.txt', 'r') as file:
+        data1 = file.read()
+        file.close()
+    with open(r'reacte.txt', 'r') as file2:
+        data2 = file2.read()    
+        file2.close()    
+    await bot.change_presence(activity=discord.Game(name=f"⚱ed {str(data1)} people | Reacted to {str(data2)} message"))
 
 @bot.slash_command(name="urn", description="⚱")
 async def urn(ctx, urn: Option(discord.Member, "pick a user to ⚱", required=True, defualt=None)):
@@ -23,6 +29,16 @@ async def urn(ctx, urn: Option(discord.Member, "pick a user to ⚱", required=Tr
     try:
         await dm.send("⚱")
         await ctx.respond(f"<@{urn.id}> has been ⚱ed", ephemeral=True)
+        with open(r'dm.txt', 'r') as file:
+            data1 = file.read()
+            data1 = data1.replace(data1, str(int(data1)+1))
+        with open(r'dm.txt', 'w') as file:
+            file.write(data1)
+            file.close()
+        with open(r'reacte.txt', 'r') as file2:
+            data2 = file2.read()
+            file2.close()
+        await bot.change_presence(activity=discord.Game(name=f"⚱ed {str(data1)} people | Reacted to {str(data2)} messages"))
     except:
         await ctx.respond(f"an error accured 🥴", ephemeral=True)
 
@@ -40,6 +56,16 @@ async def urn(ctx, message: discord.Message):
     try:
         await dm.send("⚱")
         await ctx.respond(f"<@{message.author.id}> has been ⚱ed", ephemeral=True)
+        with open(r'dm.txt', 'r') as file:
+            data1 = file.read()
+            data1 = data1.replace(data1, str(int(data1)+1))
+        with open(r'dm.txt', 'w') as file:
+            file.write(data1)
+            file.close()
+        with open(r'reacte.txt', 'r') as file2:
+            data2 = file2.read()
+            file2.close()
+        await bot.change_presence(activity=discord.Game(name=f"⚱ed {str(data1)} people | Reacted to {str(data2)} messages"))
     except:
         await ctx.respond(f"an error accured 🥴", ephemeral=True)
 
@@ -49,6 +75,16 @@ async def urn(ctx, user: discord.Member):
     try:
         await dm.send("⚱")
         await ctx.respond(f"<@{user.id}> has been ⚱ed", ephemeral=True)
+        with open(r'dm.txt', 'r') as file:
+            data1 = file.read()
+            data1 = data1.replace(data1, str(int(data1)+1))
+        with open(r'dm.txt', 'w') as file:
+            file.write(data1)
+            file.close()
+        with open(r'reacte.txt', 'r') as file2:
+            data2 = file2.read()
+            file2.close()
+        await bot.change_presence(activity=discord.Game(name=f"⚱ed {str(data1)} people | Reacted to {str(data2)} messages"))
     except:
         await ctx.respond(f"an error accured 🥴", ephemeral=True)
 
@@ -61,6 +97,16 @@ async def on_message(message):
             if "r" in message.content or "R" in message.content:
                 if "n" in message.content or "N" in message.content:
                     await message.add_reaction("⚱")
+                    with open(r'reacte.txt', 'r') as file:
+                        data1 = file.read()
+                        data1 = data1.replace(data1, str(int(data1)+1))
+                    with open(r'reacte.txt', 'w') as file:
+                        file.write(data1)
+                        file.close()
+                    with open(r'dm.txt', 'r') as file2:
+                        data2 = file2.read()
+                        file2.close()
+                    await bot.change_presence(activity=discord.Game(name=f"⚱ed {str(data2)} people | Reacted to {str(data1)} messages"))
         await bot.process_commands(message) 
 
 bot.run(os.getenv('TOKEN'))
