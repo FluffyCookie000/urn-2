@@ -89,6 +89,27 @@ async def urn(ctx, user: discord.Member):
         await ctx.respond(f"an error accured 🥴", ephemeral=True)
 
 @bot.event
+async def on_message_edit(message_before, message_after):
+    message = bot.get_message(message_after.id)
+    if message.author.id != 1043241661179900074:
+            if "⚱" in message.content:
+                await message.add_reaction("⚱")
+            elif "u" in message.content or "U" in message.content:
+                if "r" in message.content or "R" in message.content:
+                    if "n" in message.content or "N" in message.content:
+                        await message.add_reaction("⚱")
+                        with open(r'reacte.txt', 'r') as file:
+                            data1 = file.read()
+                            data1 = data1.replace(data1, str(int(data1)+1))
+                        with open(r'reacte.txt', 'w') as file:
+                            file.write(data1)
+                            file.close()
+                        with open(r'dm.txt', 'r') as file2:
+                            data2 = file2.read()
+                            file2.close()
+                        await bot.change_presence(activity=discord.Game(name=f"⚱ed {str(data2)} people | Reacted to {str(data1)} messages"))
+
+@bot.event
 async def on_message(message):
     if message.author.id != 1043241661179900074:
         if "⚱" in message.content:
