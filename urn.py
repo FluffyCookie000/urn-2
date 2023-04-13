@@ -90,11 +90,11 @@ async def urn(ctx, user: discord.Member):
 @bot.event
 async def on_message_edit(message_before, message_after):
     message = bot.get_message(message_after.id)
-    addUrn(message)
+    await addUrn(message)
 
 @bot.event
 async def on_message(message):
-        addUrn(message)
+        await addUrn(message)
         await bot.process_commands(message) 
 
 
