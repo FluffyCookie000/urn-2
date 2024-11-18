@@ -224,10 +224,10 @@ async def statPage(stuff, embed: discord.Embed, page, oulist):
                 except:
                     name = f'Unknown Server [{item}]'
             if item not in oulist:
-                embed.add_field(name=f"**{(list(stuff).index(item))+1}.** **{name}**", value=f'> **Score:** {itemdic["score"]} | {itemdic["reacte"]}:urn: | {itemdic["dm"]}<:urn_dm_beta:1299043038366273618> | {itemdic["golden"]}<:golden_urn_beta:1298831257026826240>', inline=False)
+                embed.add_field(name=f"**{(list(stuff).index(item))+1}.** **{name}**", value=f'> **Score:** {itemdic["score"]} | {itemdic["reacte"]}:urn: | {itemdic["dm"]}<:urndm:1299043301873291335> | {itemdic["golden"]}<:golden_urn:1298534134565568512>', inline=False)
             else:
                 skip = skip+1
-    embed.add_field(name='** **',value="-# :urn:**=**reactions|<:urn_dm_beta:1299043038366273618>**=**:urn:'s dm'd|<:golden_urn_beta:1298831257026826240>**=**golden :urn:'s", inline=False)
+    embed.add_field(name='** **',value="-# :urn:**=**reactions|<:urndm:1299043301873291335>**=**:urn:'s dm'd|<:golden_urn:1298534134565568512>**=**golden :urn:'s", inline=False)
     embed.set_footer(text=f'Page {page} of {await tpage(len(stuff)-skip)}')
     return embed
 
@@ -298,9 +298,9 @@ async def dmUrn(dm, guildid):
 async def goldenUrn(item, guildid, type):
     if random.randint(1,10000) <= 3:
         if type == 'reacte':
-            await item.add_reaction('<:golden_urn_beta:1298831257026826240>')
+            await item.add_reaction('<:golden_urn:1298534134565568512>')
         if type == 'dm':
-            await item.send('<:golden_urn_beta:1298831257026826240>')
+            await item.send('<:golden_urn:1298534134565568512>')
         await writeStats(guildid, 'golden')
         await activityupdater(2)
     else:
