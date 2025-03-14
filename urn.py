@@ -261,11 +261,15 @@ async def userUrn(ctx, user: discord.User):
 
 @bot.event
 async def on_message_edit(message_before, message_after):
+    if message_after.author.bot == True:
+        return
     message = bot.get_message(message_after.id)
     await reacteUrn(message)
 
 @bot.event
 async def on_message(message):
+    if message.author.bot == True:
+        return
     await reacteUrn(message)
     await bot.process_commands(message) 
 
